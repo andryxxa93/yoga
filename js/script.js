@@ -17,7 +17,7 @@ window.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    hideTabContent(1);
+hideTabContent(1);
 
     function showTabContent(b) {
         if (tabContent[b].classList.contains('hide')) {
@@ -40,4 +40,53 @@ window.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
+    let deadLine = '2020-03-29';
+    
+    function getTimeRemaining(endtime) {
+        let t = Date.parse(endtime) - (new Date()),
+            seconds = Math.floor((t / 1000) % 60),
+            minutes = Math.floor((t / 1000 / 60) % 60),
+            hours = Math.floor(t /(1000 * 60 * 60));
+        
+
+        return {
+            'total' : t,
+            'hours' : hours,
+            'minutes' : minutes,
+            'seconds' : seconds
+        };
+    }
+
+    function setClock(id, endtime) {
+        let timer = document.getElementById(id),
+            hours = timer.querySelector('.hours'),
+            minutes = timer.querySelector('.minutes'),
+            seconds = timer.querySelector('.seconds'),
+            timeInterval = setInterval(updateClock, 1000);
+
+            function updateClock() {
+                let t = getTimeRemaining(endtime);
+
+                function addZero(num) {
+                    if(num <= 9) {
+                        return '0' + num;
+                    } else {
+                        return num;
+                    }
+                }
+                hours.textContent = addZero(t.hours);
+                minutes.textContent = addZero(t.minutes);
+                seconds.textContent = addZero(t.seconds);
+    
+            if (t.total <= 0) {
+                let z = '00';
+                hours.textContent = z;
+                minutes.textContent = z;
+                seconds.textContent = z;
+            }
+        }
+    }
+
+    setClock('timer', deadLine);
 });
