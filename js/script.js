@@ -93,23 +93,26 @@ hideTabContent(1);
     // Modal
 
     function openModal(event) {
+        // определяем элементы на странцие
         const target = event.target,
             body = document.querySelector('body'),
             overlay = document.querySelector('.overlay'),
             close = document.querySelector('.popup-close');
 
+        // открываем модальное окно    
         overlay.style.display = 'block';
         target.classList.add('more-splash');
         body.style.overflow = 'hidden';
-
+        // закрываем модальное окно в случае нажатия на крести - close
         close.addEventListener('click', function(){
             overlay.style.display = 'none';
             target.classList.remove('more-splash');
             document.body.style.overflow = '';
         });
     }
-
+        // опеределяем кнопку и начинаем за ней следить. В случае нажатия вызываем функция открытия
         document.querySelector('.more').addEventListener('click', openModal);
+        // опеределяем массив кнопок, перебираем массив, запускаем слежение. В случае нажатия вызываем функцию закрытия
         document.querySelectorAll('.description-btn').forEach(function(item) {
             item.addEventListener('click', openModal);
         });
