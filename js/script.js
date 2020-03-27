@@ -89,4 +89,37 @@ hideTabContent(1);
     }
 
     setClock('timer', deadLine);
+
+    // Modal
+
+    let more = document.querySelector('.more'),
+        overlay = document.querySelector('.overlay'),
+        close = document.querySelector('.popup-close'),
+        descriptionBtn = document.querySelectorAll('.description-btn');
+
+    function showModal() {
+        overlay.style.display = 'block';
+        this.classList.add('more-splash');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function hideModal() {
+        overlay.style.display = 'none';
+        more.classList.remove('more-splash');
+        document.body.style.overflow = '';
+    }
+
+    descriptionBtn.forEach(function(item){
+        item.addEventListener('click', function(){
+        showModal();
+        });
+    });
+
+    more.addEventListener('click', function() {
+        showModal();
+    });
+
+    close.addEventListener('click', function() {
+        hideModal();
+    });
 });
