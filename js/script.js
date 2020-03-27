@@ -92,34 +92,25 @@ hideTabContent(1);
 
     // Modal
 
-    let more = document.querySelector('.more'),
-        overlay = document.querySelector('.overlay'),
-        close = document.querySelector('.popup-close'),
-        descriptionBtn = document.querySelectorAll('.description-btn');
+    function openModal(event) {
+        const target = event.target,
+            body = document.querySelector('body'),
+            overlay = document.querySelector('.overlay'),
+            close = document.querySelector('.popup-close');
 
-    function showModal() {
         overlay.style.display = 'block';
-        this.classList.add('more-splash');
-        document.body.style.overflow = 'hidden';
-    }
+        target.classList.add('more-splash');
+        body.style.overflow = 'hidden';
 
-    function hideModal() {
-        overlay.style.display = 'none';
-        more.classList.remove('more-splash');
-        document.body.style.overflow = '';
-    }
-
-    descriptionBtn.forEach(function(item){
-        item.addEventListener('click', function(){
-        showModal();
+        close.addEventListener('click', function(){
+            overlay.style.display = 'none';
+            target.classList.remove('more-splash');
+            document.body.style.overflow = '';
         });
-    });
+    }
 
-    more.addEventListener('click', function() {
-        showModal();
-    });
-
-    close.addEventListener('click', function() {
-        hideModal();
-    });
+        document.querySelector('.more').addEventListener('click', openModal);
+        document.querySelectorAll('.description-btn').forEach(function(item) {
+            item.addEventListener('click', openModal);
+        });
 });
